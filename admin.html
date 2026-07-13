@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCC Waste Exchange — Admin</title>
+
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6f2;color:#17231c;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #d8ddd8}.brand{font-weight:800;font-size:19px}.brand span{background:#173d2b;color:#d8ff55;padding:9px;margin-right:10px}.muted{color:#69756d}.login{max-width:430px;margin:10vh auto;background:white;border:1px solid #dfe4df;padding:34px;border-radius:18px}h1{font-size:42px;letter-spacing:-2px;margin:12px 0}label{display:grid;gap:7px;margin:15px 0;font-size:13px;font-weight:700}input,select{padding:13px 14px;border:1px solid #ccd4cd;border-radius:10px;background:white}.primary{border:0;background:#173d2b;color:white;padding:13px 18px;border-radius:10px;font-weight:700}.lime{background:#d8ff55;color:#173d2b}.full{width:100%}#dashboard{display:none}.top{display:flex;justify-content:space-between;align-items:end;margin:35px 0 24px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat{background:white;border:1px solid #dfe4df;border-radius:16px;padding:20px}.stat b{font-size:34px;display:block}.tools{display:flex;gap:10px;margin:18px 0}.tools input{flex:1}.list{display:grid;gap:12px}.item{display:grid;grid-template-columns:100px 1fr auto;gap:18px;align-items:center;background:white;border:1px solid #dfe4df;border-radius:16px;padding:14px}.item img{width:100px;height:82px;object-fit:cover;border-radius:10px;background:#ddd}.item h3{margin:0 0 7px;font-size:19px}.meta{font-size:12px;color:#69756d}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.actions button{border:1px solid #ccd4cd;background:white;padding:9px 11px;border-radius:9px;font-weight:700}.actions .danger{color:#a51d2d;border-color:#efc3c8}.badge{display:inline-block;padding:5px 8px;border-radius:99px;background:#e7eee8;font-size:11px;font-weight:700;margin-top:8px}#msg{margin-top:12px;color:#a51d2d;font-size:13px}@media(max-width:700px){.wrap{padding:16px}h1{font-size:34px}.stats{grid-template-columns:1fr 1fr}.item{grid-template-columns:72px 1fr}.item img{width:72px;height:72px}.actions{grid-column:1/-1;justify-content:stretch}.actions button{flex:1}.tools{flex-direction:column}}
+</style></head><body><div class="wrap">
+<header><div class="brand"><span>MCC</span>Waste Exchange Admin</div><button id="signout" class="primary" style="display:none">Sign out</button></header>
+<section id="login" class="login"><div class="muted">ADMIN ACCESS</div><h1>Manage the exchange.</h1><p class="muted">Sign in with the approved administrator account.</p>
+<form id="loginForm"><label>Email<input id="email" type="email" value="discordercool@gmail.com" required></label><label>Password<input id="password" type="password" required></label><button class="primary lime full">Sign in</button><div id="msg"></div></form></section>
+<section id="dashboard"><div class="top"><div><div class="muted">ADMIN DASHBOARD</div><h1>Listings</h1></div><div id="who" class="muted"></div></div>
+<div class="stats"><div class="stat"><b id="total">0</b><span>Total listings</span></div><div class="stat"><b id="available">0</b><span>Available</span></div><div class="stat"><b id="unavailable">0</b><span>Unavailable</span></div></div>
+<div class="tools"><input id="search" placeholder="Search listings..."><select id="filter"><option>All</option><option value="available">Available</option><option value="unavailable">Unavailable</option></select></div><div id="list" class="list"></div></section>
+</div><script>
+const URL="https://tyenxtzigwdtuyuueukz.supabase.co";
+const KEY="sb_publishable_tmXP9uW_woc6fmNf1E_SBQ_Sp5x8Vn5";
+const ADMIN="discordercool@gmail.com";
+const $=s=>document.querySelector(s);
+let items=[], token=sessionStorage.getItem("mcc_admin_token")||"";
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function headers(auth=true){let h={apikey:KEY,"Content-Type":"application/json"};if(auth&&token)h.Authorization="Bearer "+token;return h}
+function show(ok){$("#login").style.display=ok?"none":"block";$("#dashboard").style.display=ok?"block":"none";$("#signout").style.display=ok?"block":"none";if(ok){$("#who").textContent=ADMIN;load()}}
+async function validate(){if(!token)return show(false);try{let r=await fetch(URL+"/auth/v1/user",{headers:headers()});let u=await r.json();if(r.ok&&u.email?.toLowerCase()===ADMIN)show(true);else logout()}catch(e){$("#msg").textContent="Could not connect to Supabase: "+e.message;show(false)}}
+$("#loginForm").addEventListener("submit",async e=>{
+ e.preventDefault(); const msg=$("#msg"),btn=e.submitter; msg.textContent="Signing in...";btn.disabled=true;
+ try{
+  let r=await fetch(URL+"/auth/v1/token?grant_type=password",{method:"POST",headers:headers(false),body:JSON.stringify({email:$("#email").value.trim(),password:$("#password").value})});
+  let d=await r.json();
+  if(!r.ok) throw new Error(d.error_description||d.msg||d.message||"Sign in failed");
+  if(d.user?.email?.toLowerCase()!==ADMIN)throw new Error("This account is not an approved administrator.");
+  token=d.access_token;sessionStorage.setItem("mcc_admin_token",token);$("#password").value="";msg.textContent="";show(true);
+ }catch(err){msg.textContent=err.message}
+ finally{btn.disabled=false}
+});
+function logout(){token="";sessionStorage.removeItem("mcc_admin_token");show(false)}
+$("#signout").onclick=logout;
+async function api(path,opts={}){let r=await fetch(URL+"/rest/v1/"+path,{...opts,headers:{...headers(),...(opts.headers||{})}});if(!r.ok){let d=await r.json().catch(()=>({}));throw new Error(d.message||d.msg||"Request failed")}return r.status===204?null:r.json()}
+async function load(){try{items=await api("items?select=*&order=created_at.desc");render()}catch(e){$("#list").textContent=e.message}}
+function render(){let q=$("#search").value.toLowerCase(),f=$("#filter").value;let shown=items.filter(i=>(f==="All"||i.status===f)&&(`${i.name} ${i.category} ${i.location}`.toLowerCase().includes(q)));$("#total").textContent=items.length;$("#available").textContent=items.filter(i=>i.status==="available").length;$("#unavailable").textContent=items.filter(i=>i.status==="unavailable").length;$("#list").innerHTML=shown.length?shown.map(i=>`<article class="item"><img src="${esc(i.image_url)}"><div><h3>${esc(i.name)}</h3><div class="meta">${esc(i.category)} · ${esc(i.location)} · ${new Date(i.created_at).toLocaleDateString()}</div><span class="badge">${esc(i.status)}</span></div><div class="actions"><button onclick="toggleStatus(${i.id},'${i.status}')">${i.status==="available"?"Mark unavailable":"Make available"}</button><button class="danger" onclick="removeItem(${i.id})">Delete</button></div></article>`).join(""):"<p class='muted'>No listings found.</p>"}
+$("#search").oninput=render;$("#filter").onchange=render;
+async function toggleStatus(id,status){try{await api("items?id=eq."+id,{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({status:status==="available"?"unavailable":"available"})});load()}catch(e){alert(e.message)}}
+async function removeItem(id){let i=items.find(x=>x.id===id);if(!i||!confirm(`Permanently delete "${i.name}"?`))return;try{await api("items?id=eq."+id,{method:"DELETE",headers:{Prefer:"return=minimal"}});load()}catch(e){alert(e.message)}}
+validate();
+</script></body></html>
