@@ -70,14 +70,6 @@
 .modal-mark-window{width:62px;height:62px;margin:0 auto 18px}
 @media(max-width:760px){.hero-mark-window{width:44%}.modal-mark-window{width:58px;height:58px}}
 
-
-.footer-logo {
-  display: block;
-  width: 180px;
-  height: auto;
-  object-fit: contain;
-}
-
 /* MCC ReLoop project credits footer */
 .site-footer{padding:0;background:var(--forest);color:#f4f2e9;border-top:1px solid #17231c18}
 .footer-project{width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(255px,.85fr);gap:clamp(36px,6vw,84px);align-items:start;padding:clamp(52px,7vw,96px) 5vw clamp(52px,6vw,82px)}
@@ -102,3 +94,9 @@
 @media(max-width:900px){.footer-project{grid-template-columns:minmax(0,1.2fr) minmax(215px,.8fr);gap:30px}.footer-statement{font-size:clamp(30px,4.5vw,43px)}.creator-list{gap:12px 11px}.creator-list li{font-size:14px}}
 @media(max-width:680px){.site-footer{padding:0}.footer-project{grid-template-columns:1fr;gap:29px;padding:42px 6vw 38px}.footer-about{max-width:none}.footer-kicker,.footer-creators-kicker{margin-bottom:15px;font-size:9px;letter-spacing:1.8px}.footer-statement{max-width:520px;font-size:clamp(34px,9.4vw,46px);line-height:1.04}.footer-description{font-size:13px;line-height:1.85;margin-top:17px}.footer-creators{padding-top:8px;border-top:1px solid #eaf0e626}.footer-creators-kicker{margin-top:23px;margin-bottom:18px}.creator-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 18px}.creator-list li{font-size:15px}.creator-course{margin-top:20px}.creator-divider{margin:20px 0 13px}.footer-bottom{grid-template-columns:1fr auto;gap:12px;padding:17px 6vw;min-height:unset}.footer-bottom-brand{font-size:14px}.footer-mini-mark{width:30px;height:30px}.footer-tagline{grid-column:1/-1;grid-row:2;text-align:left;order:3;font-size:12px}.footer-copyright{font-size:9px;grid-column:1/-1;grid-row:3;text-align:left}}
 @media(max-width:360px){.creator-list{grid-template-columns:1fr 1fr;gap:11px 10px}.creator-list li{font-size:13px}.footer-bottom{grid-template-columns:1fr}.footer-copyright{grid-column:auto;grid-row:auto}.footer-tagline{grid-column:auto;grid-row:auto}}
+.footer-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
