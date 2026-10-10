@@ -359,6 +359,8 @@ button:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 .footer-tagline { margin: 0; text-align: center; font-size: clamp(12px, 1.2vw, 15px); color: #59685d; }
 .footer-copyright { text-align: right; white-space: normal; line-height: 1.6; }
 .footer-copyright i { padding: 0 4px; color: var(--forest-soft); font-style: normal; }
+.footer-admin-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; color: var(--forest); font-size: 12px; font-weight: 800; text-decoration: underline; text-decoration-color: #aebcae; text-underline-offset: 3px; }
+.footer-admin-link:hover { color: var(--forest-soft); text-decoration-color: currentColor; }
 @media (max-width:900px) {
   .footer-project { grid-template-columns: minmax(0,1.2fr) minmax(215px,.8fr); gap: 30px; }
   .footer-statement { font-size: clamp(33px,4.7vw,45px); }
