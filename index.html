@@ -1,119 +1,120 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#173d2b">
-<title>MCC ReLoop</title>
-<link rel="icon" type="image/png" href="reloop-favicon.png">
-<meta name="description" content="A campus community to pass on useful items. Discover, reuse and share within Madras Christian College.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MCC ReLoop — Give items another round">
-<meta property="og:description" content="Put useful items back into circulation. Share, reuse and connect across MCC.">
-<meta property="og:url" content="https://johanrohith.github.io/mcc-waste-exchange/">
-<meta property="og:image" content="https://johanrohith.github.io/mcc-waste-exchange/reloop-preview.png">
-<meta property="og:image:alt" content="MCC ReLoop — give useful items another round">
-<meta property="og:image:secure_url" content="https://johanrohith.github.io/mcc-waste-exchange/reloop-preview.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:site_name" content="MCC ReLoop">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MCC ReLoop — Give items another round">
-<meta name="twitter:description" content="Put useful items back into circulation. Share, reuse and connect across MCC.">
-<meta name="twitter:image" content="https://johanrohith.github.io/mcc-waste-exchange/reloop-preview.png">
-<link rel="icon" type="image/svg+xml" href="reloop-mark.svg">
-<style>
-:root{--paper:#f4f2e9;--paper-deep:#ebe9dd;--ink:#17271e;--forest:#173d2b;--forest-soft:#28563d;--lime:#d8ff55;--sage:#e2ecd8;--muted:#59685d;--line:#17231c24;--white:#fffefa;--shadow:0 18px 48px #17231c12}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{color:inherit}button{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}button:hover{transform:translateY(-1px)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8ba85a;outline-offset:3px}
-header{height:80px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#f4f2e9ed;backdrop-filter:blur(16px);z-index:20}.brand{display:flex;align-items:center;gap:12px;font-weight:800;text-decoration:none;color:inherit;min-width:max-content}.brandLogo{display:block;width:240px;height:75px;object-fit:contain;object-position:left center}.mark{width:43px;height:43px;background:var(--forest);color:var(--lime);border-radius:14px;display:grid;place-items:center;box-shadow:0 5px 14px #173d2b1c}.mark svg{width:28px;height:28px}.brandText{display:grid;gap:2px;line-height:1.1}.brandText strong{font-size:18px;letter-spacing:-.55px}.brandText strong span{color:var(--forest-soft)}.brandText small{font-size:9px;letter-spacing:1.35px;text-transform:uppercase;color:var(--muted);font-weight:700}nav{display:flex;gap:28px;align-items:center}nav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:650;transition:color .18s}nav a:hover{color:var(--forest)}.postBtn,.primary{border:0;background:var(--lime);color:var(--forest);padding:13px 19px;font-weight:800;border-radius:999px;box-shadow:0 7px 18px #7c9a3020}.menu{display:none;background:none;border:0;font-size:24px;color:var(--forest)}
-.hero{min-height:650px;display:grid;grid-template-columns:1.03fr .97fr;gap:30px;align-items:center;padding:76px 7vw 70px;overflow:hidden;background:radial-gradient(ellipse at 86% 48%,#dfe8d7 0,transparent 38%),var(--paper)}.heroCopy{align-self:center;max-width:680px;position:relative;z-index:1}.eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:800;margin-bottom:20px;color:var(--forest-soft);text-transform:uppercase}.hero .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 12px;background:#e5eadb;border:1px solid #d7dfcd;border-radius:999px}.hero .eyebrow:before{content:"";width:7px;height:7px;background:#668b4d;border-radius:50%}.hero h1,.sectionHead h2,.how h2,.creator h2,.sheet h2,.contactSheet h2{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;line-height:.99;letter-spacing:-3.8px}.hero h1{font-size:clamp(58px,7.1vw,108px);max-width:720px}.hero h1 em{color:var(--forest-soft);font-style:normal}.heroCopy>p{max-width:540px;font-size:17px;line-height:1.75;color:#506055;margin:26px 0 0}.heroActions{display:flex;gap:22px;align-items:center;margin:30px 0 26px}.heroActions .primary{padding:15px 22px}.secondary{color:var(--forest);font-weight:800;text-decoration:none;font-size:14px}.secondary:hover{text-decoration:underline;text-underline-offset:5px}.trust{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:750;color:#3d5545}.trust span{padding:9px 11px;border:1px solid #173d2b1d;border-radius:999px;background:#f7f6efaa}
-.heroArt{position:relative;min-height:500px;isolation:isolate}.bigCircle{position:absolute;inset:13% 6% auto auto;width:min(31vw,410px);aspect-ratio:1;border-radius:50%;background:linear-gradient(145deg,#28583f,#123522);color:var(--lime);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 32px 80px #173d2b32}.bigCircle:before{content:"";position:absolute;inset:13px;border:1px solid #d8ff5550;border-radius:inherit}.heroLoop{width:clamp(95px,11vw,145px);height:auto;filter:drop-shadow(0 8px 16px #06190c22)}.bigCircle small{display:block;margin-top:13px;font-size:10px;letter-spacing:2.4px;line-height:1.6;font-weight:800}.orbit{position:absolute;border:1px solid #173d2b2e;border-radius:50%;pointer-events:none}.o1{width:490px;height:490px;right:-4px;top:8px}.o2{width:570px;height:350px;right:-43px;top:80px;transform:rotate(34deg)}.tag{position:absolute;background:var(--white);border:1px solid #17231c0d;border-radius:14px;padding:13px 16px;font-size:10px;letter-spacing:.6px;font-weight:850;box-shadow:0 15px 32px #17231c15}.tag b{color:var(--forest-soft);margin-left:16px;font-size:15px}.t1{top:14%;left:1%;transform:rotate(-5deg)}.t2{right:-1%;top:61%;transform:rotate(4deg)}.t3{left:5%;bottom:12%;transform:rotate(3deg)}
-.exchange{padding:94px 7vw 105px;background:var(--white);border-top:1px solid #17231c09;border-bottom:1px solid #17231c09}.sectionHead{display:flex;align-items:end;justify-content:space-between;gap:20px}.sectionHead .eyebrow{margin-bottom:15px}.sectionHead h2,.how h2,.creator h2{font-size:clamp(42px,5vw,70px)}.sectionHead .postBtn{white-space:nowrap}.toolbar{display:flex;gap:12px;margin:36px 0 25px}.toolbar input,.toolbar select{border:1px solid #17231c26;background:var(--paper);padding:15px 17px;border-radius:13px;color:var(--ink)}.toolbar input{flex:1;min-width:0}.toolbar input::placeholder{color:#859087}.toolbar select{min-width:200px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{border:1px solid #17231c18;background:#faf9f3;overflow:hidden;border-radius:20px;box-shadow:0 5px 15px #17231c06;transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.cardImg{height:235px;width:100%;object-fit:cover;background:#d9ddd5;display:block}.cardBody{padding:21px}.meta{display:flex;justify-content:space-between;gap:12px;color:#667269;font-size:10px;text-transform:uppercase;letter-spacing:.8px}.meta span:last-child{text-align:right}.card h3{font-size:22px;letter-spacing:-.6px;margin:15px 0 8px}.card p{color:#58655c;line-height:1.6;min-height:48px;font-size:14px;overflow-wrap:anywhere}.cardFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}.pill{background:#e3ecd9;color:#294a35;padding:8px 10px;font-size:10px;font-weight:800;border-radius:999px}.contactBtn{border:0;border-radius:999px;background:var(--forest);color:white;padding:11px 14px;font-weight:750;font-size:12px;white-space:nowrap}.empty{display:none;text-align:center;padding:50px;color:#6a756d;grid-column:1/-1}
-.how{padding:105px 7vw 115px;background:var(--paper)}.how>.eyebrow{margin-bottom:17px}.steps{display:grid;grid-template-columns:repeat(3,1fr);margin-top:58px;border-top:1px solid #17231c30}.steps article{padding:30px 35px 20px 0;border-right:1px solid #17231c26}.steps article+article{padding-left:35px}.steps article:last-child{border-right:0}.steps span{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--sage);color:var(--forest);font-size:12px;font-weight:850}.steps h3{font-size:27px;letter-spacing:-.7px;margin:23px 0 10px}.steps p{line-height:1.7;color:#536158;font-size:14px;max-width:340px}
-.creator{background:var(--forest);color:var(--paper);padding:95px 7vw;display:grid;grid-template-columns:.2fr 1.3fr .8fr;gap:48px;position:relative;overflow:hidden}.creator:after{content:"";width:440px;height:440px;border:1px solid #d8ff5522;border-radius:50%;position:absolute;right:-170px;top:-215px;pointer-events:none}.creatorNum{font:800 78px Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--lime);letter-spacing:-4px}.creator .eyebrow{color:var(--lime)}.creator h2{font-size:clamp(38px,4.3vw,62px);letter-spacing:-2.7px}.light{color:var(--lime)}.creator>div>p{line-height:1.8;color:#c5d0c6;max-width:700px;font-size:14px}.credit{align-self:end;position:relative;z-index:1}.credit span,.credit small{font-size:9px;letter-spacing:1.4px;color:#aab9ac;font-weight:700}.credit h3{font:800 26px Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:12px 0 4px;color:var(--lime);line-height:1.2}.credit h4{font:800 22px Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:12px 0 4px;line-height:1.45}.line{height:1px;background:#ffffff33;margin:24px 0}
-footer{padding:34px 7vw;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#eeece2}footer p,footer>small{color:#657168;font-size:12px}footer .brandText strong{font-size:16px}footer .brandLogo{width:190px;height:48px}@media(max-width:800px){.brandLogo{width:170px;height:46px}}.modal{position:fixed;inset:0;background:#0c1812b8;z-index:50;display:none;align-items:flex-start;justify-content:flex-end;backdrop-filter:blur(6px)}.modal.open{display:flex}.sheet{background:var(--paper);width:min(680px,100%);height:100%;overflow:auto;padding:48px;border-radius:24px 0 0 24px;box-shadow:-25px 0 80px #08130c30}.close{float:right;border:0;background:#e5e8dc;border-radius:50%;font-size:26px;width:42px;height:42px;line-height:1;color:var(--forest)}.sheet h2,.contactSheet h2{font-size:clamp(40px,5vw,52px);letter-spacing:-2.8px}.muted{color:#69756d;line-height:1.6}.sheet form{display:grid;gap:18px;margin-top:28px}.sheet label{display:grid;gap:8px;font-size:12px;font-weight:750}.sheet input,.sheet select,.sheet textarea{width:100%;padding:14px;border:1px solid #17231c2b;background:var(--white);border-radius:11px;color:var(--ink)}.sheet textarea{height:100px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.check{display:flex!important;grid-template-columns:20px 1fr!important;align-items:start;font-weight:500!important;line-height:1.5}.check input{width:auto;margin-top:3px;accent-color:var(--forest)}.submit{padding:16px}.submit:disabled{opacity:.7;cursor:wait}.contactSheet{background:var(--paper);width:min(520px,100%);padding:42px;margin:auto;border-radius:24px;box-shadow:0 24px 80px #07120b40}.contactBox{border:1px solid #17231c23;background:#fbfaf5;border-radius:15px;padding:18px;margin:25px 0;display:grid;gap:7px;overflow-wrap:anywhere}.contactBox span{font-size:10px;letter-spacing:1px;color:var(--muted);font-weight:800}.contactAction{display:block;text-align:center;text-decoration:none;border-radius:999px}.contactAction:hover{filter:brightness(.97)}#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--forest);color:white;padding:15px 22px;z-index:80;transition:transform .3s;border-radius:999px;box-shadow:var(--shadow);font-size:13px}#toast.show{transform:translateX(-50%) translateY(0)}
-@media(max-width:1000px){.hero{padding-left:6vw;padding-right:6vw;gap:5px}.hero h1{letter-spacing:-3px}.heroArt{transform:scale(.92);transform-origin:center}.creator{grid-template-columns:.15fr 1.3fr .8fr;gap:28px}.creatorNum{font-size:60px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:800px){header{height:70px;padding:0 5vw}.menu{display:block}nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);padding:25px 5vw 28px;flex-direction:column;align-items:stretch;gap:21px;border-bottom:1px solid #ccc;box-shadow:0 18px 30px #17231c0d}nav.open{display:flex}nav a{font-size:15px}.postBtn{width:fit-content}.hero{grid-template-columns:1fr;padding:62px 6vw 26px;gap:6px}.hero h1{font-size:clamp(56px,12.5vw,82px)}.heroCopy>p{font-size:16px}.heroArt{min-height:370px;transform:none}.bigCircle{width:min(72vw,320px);right:7%;top:5%}.heroLoop{width:110px}.o1{width:360px;height:360px;right:-7%}.o2{width:400px;height:300px;right:-12%;top:36px}.trust{gap:7px}.exchange,.how{padding:70px 6vw}.grid{grid-template-columns:1fr}.cardImg{height:230px}.sectionHead{align-items:start;gap:20px}.sectionHead .postBtn{display:none}.sectionHead h2,.how h2{font-size:clamp(40px,9vw,58px);letter-spacing:-2px}.toolbar{flex-direction:column}.toolbar select{min-width:0}.steps{grid-template-columns:1fr;margin-top:38px}.steps article,.steps article+article{padding:25px 0;border-right:0;border-bottom:1px solid #17231c33}.steps article:last-child{border-bottom:0}.creator{grid-template-columns:1fr;gap:23px;padding:65px 6vw}.creatorNum{font-size:54px}.creator h2{font-size:clamp(40px,9vw,55px);letter-spacing:-2px}.credit h3{font-size:25px}footer{padding:28px 6vw;align-items:flex-start;flex-direction:column;gap:10px}.sheet{padding:30px 22px;border-radius:20px 20px 0 0;margin-top:auto;height:min(94%,900px)}.modal.open{align-items:flex-end}.sheet h2{font-size:42px}.two{grid-template-columns:1fr}.contactSheet{padding:30px 22px;width:calc(100% - 28px)}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d2b">
+  <meta name="description" content="Give useful things another loop. A reuse and exchange community for the MCC campus.">
+  <link rel="canonical" href="https://johanrohith.me/mccreloop/">
+  <link rel="icon" type="image/png" href="./reloop-logo-transparent.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>MCC ReLoop — Waste less. Loop more.</title>
 </head>
 <body>
-<header>
-  <a class="brand" href="#home" aria-label="MCC ReLoop home"><img class="brandLogo" src="reloop-logo-transparent.png" alt="MCC ReLoop" /></a>
-  <button class="menu" aria-label="Menu">☰</button>
-  <nav><a href="#home">Home</a><a href="#exchange">Exchange</a><a href="#how">How it works</a><a href="#creator">About ReLoop</a><button class="postBtn">List an item</button></nav>
-</header>
-<main>
-<section class="hero" id="home">
-  <div class="heroCopy"><div class="eyebrow">MCC CAMPUS REUSE COMMUNITY</div><h1>Waste less.<br><em>Loop More.</em></h1><p>Put useful items back into circulation. List books, electronics, project materials and more, then connect with people across the MCC community who can use them.</p><div class="heroActions"><button class="primary postBtn">Give an item a home ↗</button><a class="secondary" href="#exchange">Explore the exchange ↓</a></div><div class="trust"><span>↻ Reuse before replacing</span><span>◉ Made for MCC</span><span>↗ Connect directly</span></div></div>
-  <div class="heroArt"><div class="orbit o1"></div><div class="orbit o2"></div><div class="bigCircle"><svg class="heroLoop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><!-- Recycle icon path adapted from Font Awesome Free (CC BY 4.0): https://fontawesome.com/icons/classic/solid/recycle --><path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448l0 32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2v32l96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/></svg><small>KEEP IT<br>IN CIRCULATION</small></div><div class="tag t1">BOOKS <b>↗</b></div><div class="tag t2">TECH GEAR <b>↗</b></div><div class="tag t3">PROJECT GEAR <b>↗</b></div></div>
-</section>
-<section class="exchange" id="exchange"><div class="sectionHead"><div><div class="eyebrow">ITEMS TO ADOPT</div><h2>Find their next home.</h2></div><button class="primary postBtn">+ List an item</button></div><div class="toolbar"><input id="search" placeholder="Search items, departments..."><select id="category"><option>All categories</option><option>Electronics</option><option>Books & Paper</option><option>Plastic</option><option>Clothing</option><option>Furniture</option><option>Metal</option><option>E-Waste</option><option>Lab/Project Materials</option><option>Other</option></select></div><div id="items" class="grid"></div><div id="empty" class="empty">No items match your search.</div></section>
-<section class="how" id="how"><div class="eyebrow">SIMPLE BY DESIGN</div><h2>From unused to useful<br>in three steps.</h2><div class="steps"><article><span>01</span><h3>Post it</h3><p>Add a photo, item details, condition and where it can be found on campus.</p></article><article><span>02</span><h3>Get discovered</h3><p>Your item becomes visible to the MCC community for reuse or responsible recycling.</p></article><article><span>03</span><h3>Connect directly</h3><p>Interested people use your chosen contact method. No middleman, no complicated request flow.</p></article></div></section>
-<section class="creator" id="creator"><div class="creatorNum">01</div><div><div class="eyebrow light">WHY RELOOP EXISTS</div><h2>Useful things deserve<br>another chance.</h2><p>MCC ReLoop is a campus reuse community built to make responsible material circulation easier at Madras Christian College. By helping people pass on surplus items to someone who can use them, ReLoop encourages practical reuse, reduces avoidable waste and extends the life of everyday things.</p></div><div class="credit"><span>CREATED & DEVELOPED BY</span><h3>Computer Applications Department</h3><h4>Johan Rohith<br>Madhunisha<br>Ashal<br>Devadharshini<br>Jayadharshini<br>Presila<br>Sathish</h4><div class="line"></div><small>MCC RELOOP<br>COLLEGE SUSTAINABILITY PROJECT</small></div></section>
-</main>
-<footer><a class="brand" href="#home" aria-label="MCC ReLoop home"><img class="brandLogo" src="reloop-logo-transparent.png" alt="MCC ReLoop" /></a><p>Give items another loop.</p><small>© 2026 MCC ReLoop · Student sustainability project</small></footer>
-<div class="modal" id="modal"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">NEW RELOOP LISTING</div><h2>Give it a new home.</h2><p class="muted">Share something that can be reused or recycled by the MCC community.</p><form id="postForm"><label>Item photo<input id="photo" type="file" accept="image/*" required></label><div class="two"><label>Item name<input id="name" maxlength="60" required placeholder="e.g. Arduino Uno board"></label><label>Category<select id="formCategory" required><option value="">Select</option><option>Electronics</option><option>Books & Paper</option><option>Plastic</option><option>Clothing</option><option>Furniture</option><option>Metal</option><option>E-Waste</option><option>Lab/Project Materials</option><option>Other</option></select></label></div><label>Description<textarea id="desc" required maxlength="280" placeholder="What is it? Mention anything the next person should know."></textarea></label><div class="two"><label>Condition<select id="condition" required><option>Good</option><option>Fair</option><option>Needs repair</option><option>Material / scrap</option></select></label><label>Purpose<select id="purpose" required><option>Reuse</option><option>Recycle</option><option>Either</option></select></label></div><label>Department / campus location<input id="location" required placeholder="e.g. Computer Applications Department"></label><div class="two"><label>Contact method<select id="contactType" required><option>Phone</option><option>Email</option><option>Instagram</option><option>WhatsApp</option></select></label><label>Contact detail<input id="contact" required placeholder="Enter your contact"></label></div><label class="check"><input type="checkbox" required> I confirm this listing is intended for the MCC community and the contact information is mine to share.</label><button class="primary submit" type="submit">Publish listing ↗</button></form></div></div>
-<div class="modal" id="contactModal"><div class="contactSheet"><button class="close contactClose">×</button><div class="eyebrow">CONTACT OWNER</div><h2 id="contactTitle"></h2><p class="muted">The poster chose the following contact method.</p><div class="contactBox"><span id="contactLabel"></span><strong id="contactValue"></strong></div><a id="contactLink" class="primary contactAction" target="_blank" rel="noopener noreferrer">Open contact ↗</a></div></div><div id="toast">Listing published successfully ✓</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://tyenxtzigwdtuyuueukz.supabase.co";
-const SUPABASE_KEY = "sb_publishable_tmXP9uW_woc6fmNf1E_SBQ_Sp5x8Vn5";
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-let items = [];
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function showToast(text){const t=$("#toast");t.textContent=text;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000)}
-async function loadItems(){
-  $("#items").innerHTML='<div class="empty" style="display:block">Loading ReLoop items...</div>';
-  const {data,error}=await db.from("items").select("*").eq("status","available").order("created_at",{ascending:false});
-  if(error){$("#items").innerHTML=`<div class="empty" style="display:block">Could not load items: ${esc(error.message)}</div>`;return}
-  items=data||[]; render();
-}
-function render(){
- let q=$("#search").value.toLowerCase(),cat=$("#category").value;
- let shown=items.filter(i=>(cat==="All categories"||i.category===cat)&&(`${i.name} ${i.description} ${i.location}`.toLowerCase().includes(q)));
- $("#items").innerHTML=shown.map(i=>`<article class="card"><img class="cardImg" src="${esc(i.image_url)}" alt="${esc(i.name)}"><div class="cardBody"><div class="meta"><span>${esc(i.category)}</span><span>${esc(i.location)}</span></div><h3>${esc(i.name)}</h3><p>${esc(i.description)}</p><div class="cardFoot"><span class="pill">${esc(i.purpose)} · ${esc(i.condition)}</span><button class="contactBtn" data-id="${i.id}">Contact owner</button></div></div></article>`).join("");
- $("#empty").style.display=shown.length?"none":"block";
- $$(".contactBtn").forEach(b=>b.onclick=()=>contact(items.find(i=>String(i.id)===b.dataset.id)));
-}
-$("#search").oninput=render; $("#category").onchange=render;
-const modal=$("#modal"); $$(".postBtn").forEach(b=>b.onclick=()=>modal.classList.add("open"));
-$(".sheet .close").onclick=()=>modal.classList.remove("open");
-modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};
-$(".menu").onclick=()=>$("nav").classList.toggle("open");
-$$("nav a").forEach(a=>a.onclick=()=>$("nav").classList.remove("open"));
-$("#postForm").onsubmit=async e=>{
- e.preventDefault();
- const submit=e.target.querySelector(".submit"), file=$("#photo").files[0];
- if(!file)return;
- if(file.size>6*1024*1024){alert("Please choose an image smaller than 6 MB.");return}
- submit.disabled=true; submit.textContent="Publishing...";
- try{
-   const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-zA-Z0-9]/g,"");
-   const path=`${Date.now()}-${crypto.randomUUID()}.${ext}`;
-   const {error:uploadError}=await db.storage.from("item-images").upload(path,file,{cacheControl:"3600",upsert:false});
-   if(uploadError) throw uploadError;
-   const {data:publicData}=db.storage.from("item-images").getPublicUrl(path);
-   const payload={name:$("#name").value.trim(),category:$("#formCategory").value,description:$("#desc").value.trim(),condition:$("#condition").value,purpose:$("#purpose").value,location:$("#location").value.trim(),contact_type:$("#contactType").value,contact_detail:$("#contact").value.trim(),image_url:publicData.publicUrl};
-   const {error:insertError}=await db.from("items").insert(payload);
-   if(insertError){await db.storage.from("item-images").remove([path]);throw insertError}
-   e.target.reset();modal.classList.remove("open");showToast("Listing published successfully ✓");await loadItems();location.hash="#exchange";
- }catch(err){alert("Could not publish item: "+err.message)}
- finally{submit.disabled=false;submit.textContent="Publish listing ↗"}
-};
-function contact(i){
- if(!i)return;
- $("#contactTitle").textContent=i.name;$("#contactLabel").textContent=i.contact_type.toUpperCase();$("#contactValue").textContent=i.contact_detail;
- let a=$("#contactLink"),v=i.contact_detail.trim();
- if(i.contact_type==="Email")a.href="mailto:"+v;
- else if(i.contact_type==="Phone")a.href="tel:"+v.replace(/\s/g,"");
- else if(i.contact_type==="WhatsApp")a.href="https://wa.me/"+v.replace(/\D/g,"");
- else a.href="https://instagram.com/"+v.replace("@","");
- $("#contactModal").classList.add("open");
-}
-$(".contactClose").onclick=()=>$("#contactModal").classList.remove("open");
-$("#contactModal").onclick=e=>{if(e.target===$("#contactModal"))$("#contactModal").classList.remove("open")};
-loadItems();
-</script>
-</body></html>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="MCC ReLoop home">
+      <img class="brand-icon" src="./images/reloop-logo-transparent.png" alt="">
+      <span class="brand-copy"><strong>MCC <span>ReLoop</span></strong><small>Campus reuse community</small></span>
+    </a>
+    <button class="menu-button" id="menu-button" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="#exchange">Explore items</a>
+      <a href="#how-it-works">How it works</a>
+      <button class="nav-link" id="my-chats-button" hidden>My chats</button>
+      <button class="button button-small" id="list-item-button">+ List an item</button>
+      <button class="nav-link" id="account-button">Sign in</button>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> MADE FOR THE MCC COMMUNITY</p>
+        <h1>Waste less.<br><em>Loop more.</em></h1>
+        <p class="hero-description">Good things still have a purpose. Pass on books, project materials, electronics and more to someone who can use them next.</p>
+        <div class="hero-actions">
+          <a class="button" href="#exchange">Explore the exchange <span aria-hidden="true">↘</span></a>
+          <button class="text-button" id="hero-list-button">Give an item a new home <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="hero-note"><span class="note-mark">↻</span><span>One campus. More reuse. Less waste.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Three arrows representing reuse and circulation">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-circle">
+          <svg class="recycle-symbol" viewBox="0 0 120 120" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+              <path d="M40 18h12q8 0 12 8l7 12"/><path d="m59 33 12 5 1-13"/>
+              <path d="M82 47 75 59q-4 7-12 7H49"/><path d="m57 58-8 8 8 6"/>
+              <path d="M37 65 29 52q-4-7 0-14l7-12"/><path d="m27 35 9-9 2 12"/>
+            </g>
+          </svg>
+          <p>KEEP IT IN<br> CIRCULATION</p>
+        </div>
+        <div class="float-card float-books"><span class="float-icon">▤</span><span><strong>Books</strong><small>Read again</small></span></div>
+        <div class="float-card float-tech"><span class="float-icon">⌘</span><span><strong>Tech gear</strong><small>Use it longer</small></span></div>
+        <div class="float-card float-project"><span class="float-icon">✳</span><span><strong>Project gear</strong><small>Make more</small></span></div>
+        <span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <section class="exchange-section section-wrap" id="exchange">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE COMMUNITY EXCHANGE</p><h2>Find its next home.</h2><p class="section-description">Browse what other MCC members are ready to pass on.</p></div>
+        <button class="button" id="section-list-button">+ List an item</button>
+      </div>
+      <div class="filters">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search items, details or locations" autocomplete="off"></label>
+        <label class="category-filter"><span class="visually-hidden">Filter by category</span><select id="category-filter"><option value="all">All categories</option><option>Books &amp; Paper</option><option>Electronics</option><option>E-Waste</option><option>Clothing</option><option>Furniture</option><option>Metal</option><option>Plastic</option><option>Lab/Project Materials</option><option>Other</option></select></label>
+      </div>
+      <p class="result-count" id="result-count" aria-live="polite">Loading listings…</p>
+      <div class="item-grid" id="item-grid"><div class="loading-card">Loading ReLoop items…</div></div>
+      <div class="empty-state" id="empty-state" hidden><span class="empty-icon">↻</span><h3>No items found yet</h3><p>Try another search, or be the first to list something useful.</p><button class="button" id="empty-list-button">List an item</button></div>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="section-wrap">
+        <p class="eyebrow">SIMPLE BY DESIGN</p><h2>Keep useful things moving.</h2>
+        <div class="steps-grid">
+          <article class="step"><span class="step-number">01</span><div class="step-icon">＋</div><h3>List it</h3><p>Sign in with your verified MCC email and add a photo with the item details.</p></article>
+          <article class="step"><span class="step-number">02</span><div class="step-icon">⌕</div><h3>Find a match</h3><p>Browse listings from the campus community and find something useful.</p></article>
+          <article class="step"><span class="step-number">03</span><div class="step-icon">↗</div><h3>Chat privately</h3><p>Message the poster inside ReLoop to arrange the handover.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home"><img class="brand-icon" src="./images/reloop-logo-transparent.png" alt=""><span class="brand-copy"><strong>MCC <span>ReLoop</span></strong><small>Give items another loop.</small></span></a>
+    <p>Made for a more resourceful campus.</p>
+    <a class="footer-admin" href="./admin.html">Admin</a>
+    <small>© 2026 MCC ReLoop</small>
+  </footer>
+
+  <dialog class="modal" id="signin-dialog">
+    <form method="dialog" class="modal-card compact-modal"><button class="modal-close" aria-label="Close">×</button><img class="modal-logo" src="./images/reloop-logo-transparent.png" alt=""><p class="eyebrow">WELCOME TO RELOOP</p><h2>Sign in with MCC.</h2><p class="modal-description">Use your verified <strong>@mcc.edu.in</strong> Google account to list items and chat privately with other members.</p><button type="button" class="button google-button" id="google-signin-button"><span class="google-g">G</span> Continue with Google</button><p class="form-message" id="signin-message" aria-live="polite"></p><p class="fine-print">Only verified MCC email accounts are accepted.</p></form>
+  </dialog>
+
+  <dialog class="modal" id="listing-dialog">
+    <form class="modal-card" id="listing-form"><button type="button" class="modal-close" data-close="listing-dialog" aria-label="Close">×</button><p class="eyebrow">NEW LISTING</p><h2>Give it a new home.</h2><p class="modal-description">Add a few details so another MCC member can make use of it.</p>
+      <label class="field">Item photo<input type="file" id="item-photo" accept="image/*" required><small>JPG, PNG or WebP · up to 6 MB</small></label>
+      <label class="field">Item name<input id="item-title" type="text" maxlength="70" placeholder="e.g. Arduino Uno board" required></label>
+      <div class="form-row"><label class="field">Category<select id="item-category" required><option value="">Choose a category</option><option>Books &amp; Paper</option><option>Electronics</option><option>E-Waste</option><option>Clothing</option><option>Furniture</option><option>Metal</option><option>Plastic</option><option>Lab/Project Materials</option><option>Other</option></select></label><label class="field">Condition<select id="item-condition" required><option>Good</option><option>Fair</option><option>Needs repair</option><option>Material / scrap</option></select></label></div>
+      <div class="form-row"><label class="field">Purpose<select id="item-purpose" required><option>Reuse</option><option>Recycle</option><option>Either</option></select></label><label class="field">Campus location<input id="item-location" maxlength="100" placeholder="e.g. Science block" required></label></div>
+      <label class="field">Description<textarea id="item-description" maxlength="500" rows="3" placeholder="Share useful details about the item…" required></textarea></label>
+      <p class="form-message" id="listing-message" aria-live="polite"></p><button class="button full-width" id="publish-button" type="submit">Publish listing ↗</button>
+    </form>
+  </dialog>
+
+  <dialog class="modal chat-modal" id="messages-dialog">
+    <section class="modal-card messages-card"><button type="button" class="modal-close" data-close="messages-dialog" aria-label="Close">×</button>
+      <div id="inbox-view"><p class="eyebrow">YOUR MESSAGES</p><h2>Private chats.</h2><p class="modal-description">Conversations are only visible to the people involved.</p><div class="conversation-list" id="conversation-list"><p class="muted">Loading your conversations…</p></div><p class="form-message" id="inbox-message"></p></div>
+      <div id="conversation-view" hidden><button class="back-button" id="back-to-inbox">← All chats</button><p class="eyebrow">ITEM CONVERSATION</p><h2 id="conversation-title">Chat</h2><p class="chat-subtitle" id="conversation-subtitle"></p><div class="message-list" id="message-list" aria-live="polite"></div><form class="message-form" id="message-form"><textarea id="message-input" rows="2" maxlength="2000" placeholder="Write a message…" required></textarea><button class="button" type="submit" id="send-message-button">Send ↗</button></form><p class="form-message" id="chat-message" aria-live="polite"></p></div>
+    </section>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
