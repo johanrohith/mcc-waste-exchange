@@ -13,9 +13,12 @@
 <body>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="MCC ReLoop home">
-      <img class="brand-icon" src="./images/reloop-logo-transparent.png" alt="">
-      <span class="brand-copy"><strong>MCC <span>ReLoop</span></strong><small>Campus reuse community</small></span>
+      <img class="brand-logo" src="./images/reloop-logo-transparent.png" alt="MCC ReLoop">
     </a>
+    <div class="mobile-account" id="mobile-account" hidden>
+      <span class="mobile-account-name" id="mobile-account-name"></span>
+      <button class="mobile-signout" id="mobile-signout-button" type="button">Log out</button>
+    </div>
     <button class="menu-button" id="menu-button" aria-label="Open menu" aria-expanded="false">☰</button>
     <nav class="main-nav" id="main-nav">
       <a href="#exchange">Explore items</a>
@@ -23,6 +26,10 @@
       <button class="nav-link" id="my-chats-button" hidden>My chats</button>
       <button class="button button-small" id="list-item-button">+ List an item</button>
       <button class="nav-link" id="account-button">Sign in</button>
+      <div class="account-menu" id="account-menu" hidden>
+        <span class="account-name" id="account-name"></span>
+        <button class="nav-link account-signout" id="signout-button" type="button">Log out</button>
+      </div>
     </nav>
   </header>
 
@@ -38,16 +45,10 @@
         </div>
         <div class="hero-note"><span class="note-mark">↻</span><span>One campus. More reuse. Less waste.</span></div>
       </div>
-      <div class="hero-art" aria-label="Three arrows representing reuse and circulation">
+      <div class="hero-art" aria-label="MCC ReLoop's reuse mark, with examples of items to keep in circulation">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <div class="hero-circle">
-          <svg class="recycle-symbol" viewBox="0 0 120 120" aria-hidden="true">
-            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
-              <path d="M40 18h12q8 0 12 8l7 12"/><path d="m59 33 12 5 1-13"/>
-              <path d="M82 47 75 59q-4 7-12 7H49"/><path d="m57 58-8 8 8 6"/>
-              <path d="M37 65 29 52q-4-7 0-14l7-12"/><path d="m27 35 9-9 2 12"/>
-            </g>
-          </svg>
+          <span class="reloop-mark-window hero-mark-window" aria-hidden="true"><img src="./images/reloop-logo-transparent.png" alt=""></span>
           <p>KEEP IT IN<br> CIRCULATION</p>
         </div>
         <div class="float-card float-books"><span class="float-icon">▤</span><span><strong>Books</strong><small>Read again</small></span></div>
@@ -84,14 +85,12 @@
   </main>
 
   <footer class="site-footer">
-    <a class="brand footer-brand" href="#home"><img class="brand-icon" src="./images/reloop-logo-transparent.png" alt=""><span class="brand-copy"><strong>MCC <span>ReLoop</span></strong><small>Give items another loop.</small></span></a>
-    <p>Made for a more resourceful campus.</p>
+    <a class="brand footer-brand" href="#home" aria-label="MCC ReLoop home"><img class="brand-logo" src="./images/reloop-logo-transparent.png" alt="MCC ReLoop"></a>
     <a class="footer-admin" href="./admin.html">Admin</a>
-    <small>© 2026 MCC ReLoop</small>
   </footer>
 
   <dialog class="modal" id="signin-dialog">
-    <form method="dialog" class="modal-card compact-modal"><button class="modal-close" aria-label="Close">×</button><img class="modal-logo" src="./images/reloop-logo-transparent.png" alt=""><p class="eyebrow">WELCOME TO RELOOP</p><h2>Sign in with MCC.</h2><p class="modal-description">Use your verified <strong>@mcc.edu.in</strong> Google account to list items and chat privately with other members.</p><button type="button" class="button google-button" id="google-signin-button"><span class="google-g">G</span> Continue with Google</button><p class="form-message" id="signin-message" aria-live="polite"></p><p class="fine-print">Only verified MCC email accounts are accepted.</p></form>
+    <form method="dialog" class="modal-card compact-modal"><button class="modal-close" aria-label="Close">×</button><span class="reloop-mark-window modal-mark-window" aria-hidden="true"><img src="./images/reloop-logo-transparent.png" alt=""></span><p class="eyebrow">WELCOME TO RELOOP</p><h2>Sign in with MCC.</h2><p class="modal-description">Use your verified <strong>@mcc.edu.in</strong> Google account to list items and chat privately with other members.</p><button type="button" class="button google-button" id="google-signin-button"><span class="google-g">G</span> Continue with Google</button><p class="form-message" id="signin-message" aria-live="polite"></p><p class="fine-print">Only verified MCC email accounts are accepted.</p></form>
   </dialog>
 
   <dialog class="modal" id="listing-dialog">

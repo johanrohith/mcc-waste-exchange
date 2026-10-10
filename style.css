@@ -7,3 +7,65 @@
 @media(max-width:760px){.site-header{height:70px;padding:0 5vw}.menu-button{display:block}.main-nav{display:none;position:absolute;top:69px;left:0;right:0;background:var(--paper);padding:22px 5vw 26px;flex-direction:column;align-items:stretch;gap:18px;border-bottom:1px solid var(--line);box-shadow:0 14px 20px #17231c0b}.main-nav.open{display:flex}.main-nav>a,.main-nav .nav-link{text-align:left}.hero{grid-template-columns:1fr;padding:55px 6vw 42px;gap:10px;min-height:unset}.hero-copy{max-width:570px}.hero h1{font-size:clamp(55px,13vw,84px)}.hero-description{font-size:14px;margin-top:20px}.hero-actions{gap:15px;align-items:flex-start;flex-direction:column;margin-top:22px}.hero-art{width:min(100%,510px);justify-self:center;min-height:395px;transform:none;margin-top:2px}.hero-circle{width:min(68vw,300px)}.orbit-one{width:min(82vw,370px)}.orbit-two{width:min(96vw,430px)}.float-books{left:0;top:11%}.float-tech{right:0;top:43%}.float-project{left:0;bottom:8%}.float-card{padding:9px 10px;min-width:125px;gap:8px}.float-icon{width:29px;height:29px;font-size:17px}.float-card strong{font-size:11px}.float-card small{font-size:9px}.spark-one{right:14%}.section-wrap{padding-left:6vw;padding-right:6vw}.exchange-section{padding-top:60px;padding-bottom:68px}.section-heading{align-items:flex-start;flex-direction:column}.section-heading h2,.how-section h2{font-size:clamp(34px,8.8vw,49px);letter-spacing:-1.8px}.section-heading>.button{align-self:flex-start}.filters{margin-top:25px;flex-direction:column;align-items:stretch}.filters select,.category-filter{width:100%}.filters select{min-width:0}.item-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.item-image{height:155px}.item-body{padding:12px}.item-meta{font-size:9px}.item-location{max-width:58%}.item-title{font-size:16px}.item-description{font-size:11px;min-height:55px}.item-tags{gap:5px}.pill{font-size:9px;padding:4px 7px}.item-card .button{font-size:11px;padding:11px 8px}.how-section{padding:65px 0 70px}.steps-grid{grid-template-columns:1fr;margin-top:28px}.step,.step+.step{padding:24px 0 27px;border-right:0;border-bottom:1px solid var(--line);min-height:unset}.step:last-child{border-bottom:0}.step-number{right:3px;top:25px}.step h3{margin-top:13px}.site-footer{padding:23px 6vw;gap:14px}.site-footer p{order:3;width:100%}.footer-admin{margin-left:auto}.form-row{grid-template-columns:1fr;gap:0}.modal-card{padding:28px 21px 23px}.compact-modal{padding:40px 24px 27px}.messages-card{padding:25px 17px 20px}.message-list{height:38vh}.message-form{align-items:stretch}.message-form .button{padding:11px 13px}.admin-main{padding-top:45px;padding-bottom:55px}.admin-login{padding:30px 22px}.admin-heading{gap:17px}.admin-actions{width:100%;justify-content:space-between}.stats-grid{gap:8px}.stat-card{padding:14px 12px}.stat-card span{font-size:10px}.stat-card strong{font-size:25px}.admin-item{grid-template-columns:72px minmax(0,1fr);gap:11px;padding:10px}.admin-item>img{width:72px;height:72px}.admin-item h3{font-size:13px}.admin-item-actions{grid-column:1/-1;flex-direction:row;justify-content:flex-end}.small-action{flex:1}.admin-filters{margin-top:0}}
 @media(max-width:390px){.item-grid{grid-template-columns:1fr}.item-image{height:205px}.item-description{min-height:0}.hero-art{min-height:350px}.float-card{min-width:114px}.hero-circle p{font-size:9px}.stats-grid{grid-template-columns:1fr}.stat-card{display:flex;align-items:center;justify-content:space-between}.stat-card strong{margin-top:0}.message-form{flex-direction:column}.message-form .button{align-self:flex-end}}
 .main-nav .account-email{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+
+
+/* ReLoop visual refinements: reuse the approved brand mark and remove duplicate wordmark text. */
+.brand{min-width:0;gap:0;text-decoration:none;flex:0 1 auto}
+.brand-logo{display:block;width:clamp(175px,21vw,250px);height:auto;max-height:72px;object-fit:contain;object-position:left center;flex:0 1 auto}
+.footer-brand .brand-logo{width:clamp(155px,17vw,205px);max-height:60px}
+.modal-logo{width:62px;height:62px;object-fit:contain;border-radius:0}
+.account-menu{display:flex;align-items:center;gap:12px;min-width:0;max-width:min(350px,35vw)}
+.account-menu[hidden],.mobile-account[hidden]{display:none!important}
+.account-name{display:block;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--forest);font-size:12px;font-weight:800}
+.account-signout{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:11px}
+.mobile-account{display:none}
+.hero-art{min-height:555px}
+.hero-circle{width:min(36vw,430px)}
+.recycle-symbol{display:block;width:43%;height:auto;aspect-ratio:1;object-fit:contain}
+.orbit-one{width:min(45vw,550px)}
+.orbit-two{width:min(53vw,640px)}
+.site-footer{min-height:86px}
+.admin-footer .brand-logo{width:clamp(155px,17vw,205px)}
+@media(max-width:1000px) and (min-width:761px){
+  .site-header{gap:16px}
+  .brand-logo{width:clamp(170px,23vw,230px)}
+  .hero-art{min-height:510px;transform:scale(.98)}
+  .hero-circle{width:min(38vw,390px)}
+  .orbit-one{width:min(48vw,485px)}
+  .orbit-two{width:min(56vw,565px)}
+  .recycle-symbol{width:43%}
+}
+@media(max-width:760px){
+  .site-header{gap:8px}
+  .brand-logo{width:min(165px,42vw);max-height:56px}
+  .mobile-account{display:flex;flex:0 1 142px;min-width:0;flex-direction:column;align-items:flex-end;justify-content:center;gap:1px;margin-left:auto}
+  .mobile-account-name{display:-webkit-box;max-width:100%;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere;text-align:right;font-size:10px;line-height:1.15;font-weight:800;color:var(--forest)}
+  .mobile-signout{border:0;background:transparent;color:var(--forest-soft);font-size:10px;font-weight:800;line-height:1.15;padding:3px 0}
+  .menu-button{flex:0 0 auto;margin-left:2px}
+  .account-menu{display:none!important}
+  .hero-art{min-height:395px}
+  .hero-circle{width:min(74vw,320px)}
+  .recycle-symbol{width:44%}
+  .orbit-one{width:min(90vw,395px)}
+  .orbit-two{width:min(102vw,430px)}
+  .site-footer{min-height:76px;align-items:center}
+  .footer-brand .brand-logo{width:min(170px,48vw);max-height:52px}
+}
+@media(max-width:390px){
+  .site-header{padding-left:4vw;padding-right:4vw;gap:6px}
+  .brand-logo{width:min(145px,40vw)}
+  .mobile-account{flex-basis:130px}
+  .mobile-account-name{font-size:9px}
+  .hero-art{min-height:360px}
+  .hero-circle{width:min(74vw,292px)}
+  .orbit-two{width:min(104vw,410px)}
+}
+
+
+/* Reuse the existing wordmark file for the icon display; no new image asset is needed. */
+.reloop-mark-window{position:relative;display:block;overflow:hidden;flex:0 0 auto;aspect-ratio:1}
+.reloop-mark-window img{position:absolute;top:6%;left:0;height:88%;width:auto;max-width:none;object-fit:contain;object-position:left center}
+.hero-mark-window{width:43%}
+.hero-mark-window img{filter:brightness(0) saturate(100%) invert(91%) sepia(77%) saturate(700%) hue-rotate(23deg) brightness(106%) contrast(105%)}
+.modal-mark-window{width:62px;height:62px;margin:0 auto 18px}
+@media(max-width:760px){.hero-mark-window{width:44%}.modal-mark-window{width:58px;height:58px}}
