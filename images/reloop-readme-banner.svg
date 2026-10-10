@@ -29,7 +29,7 @@
   </g>
   <text x="600" y="126" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="800" letter-spacing="-2" fill="url(#green)">MCC ReLoop</text>
   <text x="600" y="169" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" letter-spacing="3" fill="#294d39">Waste less. Loop More.</text>
-  <text x="600" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="3" fill="#54745a">A CAMPUS REUSE PLATFORM FOR MCC STUDENTS</text>
+  <text x="600" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="2.5" fill="#54745a">A CAMPUS REUSE PLATFORM FOR MCC STUDENTS</text>
   <g transform="translate(535 222)" fill="none" stroke="#6b9656" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M-14 0 A14 14 0 0 1 8 -12"/>
     <path d="M2 -13 L9 -12 L9 -5"/>
