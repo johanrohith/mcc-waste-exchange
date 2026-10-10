@@ -9,6 +9,7 @@
   let items = [];
   let activeConversationId = null;
   let activeChannel = null;
+  let activeInboxChannel = null;
   let inboxItems = [];
   let toastTimer = null;
 
@@ -362,46 +363,135 @@
     showFormMessage("#inbox-message", "");
     $("#conversation-list").innerHTML = '<p class="muted">Loading your conversations…</p>';
     if (!messagesDialog.open) messagesDialog.showModal();
+    subscribeToInbox();
     await loadInbox();
   }
 
   async function loadInbox() {
+    if (!currentUser) return;
     const list = $("#conversation-list");
     const { data: conversations, error } = await db.from("conversations")
-      .select("id,item_id,viewer_id,poster_id,last_message_at")
+      .select("id,item_id,viewer_id,poster_id,last_message_at,created_at")
       .order("last_message_at", { ascending: false });
+
     if (error) {
       list.innerHTML = "";
-      showFormMessage("#inbox-message", "Your chats could not be loaded. Please try again.");
+      showFormMessage("#inbox-message", "Your chats could not be loaded. Please refresh and try again.");
+      console.error("ReLoop inbox load failed:", error.message);
       return;
     }
+
     inboxItems = conversations || [];
     if (!inboxItems.length) {
-      list.innerHTML = '<p class="muted">No chats yet. Open a listing and choose “Chat with poster” to start a private conversation.</p>';
+      list.innerHTML = `
+        <section class="conversation-section">
+          <h3 class="conversation-section-title">People interested in your listings</h3>
+          <p class="conversation-section-empty">No one has started a conversation about your listings yet.</p>
+        </section>
+        <section class="conversation-section">
+          <h3 class="conversation-section-title">Your enquiries</h3>
+          <p class="conversation-section-empty">When you contact a poster, your conversation will appear here.</p>
+        </section>`;
+      showFormMessage("#inbox-message", "");
       return;
     }
 
     const itemIds = [...new Set(inboxItems.map((chat) => chat.item_id))];
-    const memberIds = [...new Set(inboxItems.map((chat) => chat.viewer_id === currentUser.id ? chat.poster_id : chat.viewer_id))];
-    const [{ data: itemRows }, { data: profiles }] = await Promise.all([
+    const otherMemberIds = [...new Set(inboxItems.map((chat) =>
+      chat.viewer_id === currentUser.id ? chat.poster_id : chat.viewer_id
+    ))];
+    const conversationIds = inboxItems.map((chat) => chat.id);
+    const [itemsResult, profilesResult, messagesResult] = await Promise.all([
       db.from("items").select("id,title").in("id", itemIds),
-      db.from("profiles").select("id,display_name,email").in("id", memberIds)
+      db.from("profiles").select("id,display_name,email").in("id", otherMemberIds),
+      db.from("messages").select("id,conversation_id,sender_id,body,created_at")
+        .in("conversation_id", conversationIds).order("created_at", { ascending: false })
     ]);
-    const itemMap = new Map((itemRows || []).map((item) => [item.id, item]));
-    const profileMap = new Map((profiles || []).map((profile) => [profile.id, profile]));
-    list.innerHTML = inboxItems.map((chat) => {
+
+    if (itemsResult.error || profilesResult.error) {
+      showFormMessage("#inbox-message", "Some contact or listing details could not be loaded. You can still open a conversation.");
+      console.error("Inbox details failed:", itemsResult.error?.message, profilesResult.error?.message);
+    } else {
+      showFormMessage("#inbox-message", messagesResult.error ? "Latest message previews are temporarily unavailable; open a chat to read messages." : "");
+    }
+
+    const itemMap = new Map((itemsResult.data || []).map((item) => [item.id, item]));
+    const profileMap = new Map((profilesResult.data || []).map((profile) => [profile.id, profile]));
+    const latestMessageMap = new Map();
+    // Messages arrive sorted newest-first, so the first row for each chat is its preview.
+    for (const message of messagesResult.data || []) {
+      if (!latestMessageMap.has(message.conversation_id)) {
+        latestMessageMap.set(message.conversation_id, message);
+      }
+    }
+
+    const incoming = inboxItems.filter((chat) => chat.poster_id === currentUser.id);
+    const outgoing = inboxItems.filter((chat) => chat.viewer_id === currentUser.id);
+    const renderRows = (rows, kind) => rows.map((chat) => {
       const otherId = chat.viewer_id === currentUser.id ? chat.poster_id : chat.viewer_id;
       const other = profileMap.get(otherId);
       const item = itemMap.get(chat.item_id);
       const otherName = cleanDisplayName(other?.display_name) || other?.email || "MCC member";
-      return `<button class="conversation-row" type="button" data-conversation-id="${escapeHtml(chat.id)}">
-        <span class="conversation-avatar" aria-hidden="true">↻</span><span class="conversation-text"><strong>${escapeHtml(item?.title || "Item conversation")}</strong><small>${escapeHtml(otherName)}</small></span><span class="conversation-arrow">↗</span>
+      const itemTitle = item?.title || "Item conversation";
+      const latest = latestMessageMap.get(chat.id);
+      const preview = latest
+        ? `${latest.sender_id === currentUser.id ? "You" : otherName}: ${latest.body}`
+        : "Conversation opened · no messages yet";
+      const previewDate = latest?.created_at || chat.last_message_at || chat.created_at;
+      const formattedDate = previewDate
+        ? new Date(previewDate).toLocaleDateString([], { day: "numeric", month: "short" })
+        : "";
+      const initials = otherName.trim().charAt(0).toUpperCase() || "M";
+      return `<button class="conversation-row ${kind}" type="button" data-conversation-id="${escapeHtml(chat.id)}">
+        <span class="conversation-avatar" aria-hidden="true">${escapeHtml(initials)}</span>
+        <span class="conversation-text">
+          <span class="conversation-topline"><strong>${escapeHtml(otherName)}</strong><span class="conversation-role">${kind === "incoming" ? "Interested in your listing" : "Your enquiry"}</span></span>
+          <span class="conversation-item">Re: ${escapeHtml(itemTitle)}</span>
+          <small class="conversation-preview">${escapeHtml(preview)}</small>
+        </span>
+        <span class="conversation-end"><time>${escapeHtml(formattedDate)}</time><span class="conversation-arrow" aria-hidden="true">↗</span></span>
       </button>`;
     }).join("");
-    $$(".conversation-row").forEach((button) => button.addEventListener("click", () => openConversation(button.dataset.conversationId, true)));
+
+    list.innerHTML = `
+      <section class="conversation-section">
+        <h3 class="conversation-section-title">People interested in your listings <span>${incoming.length}</span></h3>
+        ${incoming.length ? `<div class="conversation-section-list">${renderRows(incoming, "incoming")}</div>` : '<p class="conversation-section-empty">No one has started a conversation about your listings yet.</p>'}
+      </section>
+      <section class="conversation-section">
+        <h3 class="conversation-section-title">Your enquiries <span>${outgoing.length}</span></h3>
+        ${outgoing.length ? `<div class="conversation-section-list">${renderRows(outgoing, "outgoing")}</div>` : '<p class="conversation-section-empty">Conversations you start with posters will appear here.</p>'}
+      </section>`;
+
+    $$(".conversation-row").forEach((button) => button.addEventListener("click", () => {
+      openConversation(button.dataset.conversationId, true);
+    }));
+  }
+
+  function subscribeToInbox() {
+    unsubscribeFromInbox();
+    if (!currentUser) return;
+    activeInboxChannel = db.channel(`reloop-inbox-${currentUser.id}`)
+      // The messages table is enabled in Supabase Realtime by the existing schema.
+      // Refresh the inbox on any incoming message so a newly created conversation
+      // also appears even if it was not in inboxItems when the modal was opened.
+      .on("postgres_changes", {
+        event: "INSERT", schema: "public", table: "messages"
+      }, (payload) => {
+        if (payload.new?.sender_id !== currentUser?.id) void loadInbox();
+      })
+      .subscribe();
+  }
+
+  function unsubscribeFromInbox() {
+    if (activeInboxChannel) {
+      db.removeChannel(activeInboxChannel);
+      activeInboxChannel = null;
+    }
   }
 
   async function openConversation(conversationId, showBack) {
+    unsubscribeFromInbox();
     unsubscribeFromChat();
     activeConversationId = conversationId;
     showFormMessage("#chat-message", "");
@@ -484,6 +574,8 @@
   }
 
   async function signOut() {
+    unsubscribeFromInbox();
+    unsubscribeFromChat();
     const { error } = await db.auth.signOut();
     if (error) {
       showToast("Couldn't sign out. Please try again.");
@@ -513,10 +605,12 @@
     activeConversationId = null;
     $("#conversation-view").hidden = true;
     $("#inbox-view").hidden = false;
+    subscribeToInbox();
     await loadInbox();
   });
   $$("[data-close]").forEach((button) => button.addEventListener("click", () => $("#" + button.dataset.close).close()));
   messagesDialog.addEventListener("close", () => {
+    unsubscribeFromInbox();
     unsubscribeFromChat();
     activeConversationId = null;
   });
