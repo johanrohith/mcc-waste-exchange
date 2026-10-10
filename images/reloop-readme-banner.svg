@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-labelledby="title desc">
+  <title id="title">MCC ReLoop</title>
+  <desc id="desc">A simple animated green banner for the MCC ReLoop campus reuse project.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f5e9"/>
+      <stop offset="100%" stop-color="#e8efdc"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#244c38"/>
+      <stop offset="100%" stop-color="#6b9656"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="260" rx="22" fill="url(#bg)"/>
+  <circle cx="1080" cy="40" r="130" fill="#dce8cb" opacity=".65"/>
+  <circle cx="80" cy="240" r="120" fill="#dce8cb" opacity=".55"/>
+  <g fill="none" stroke="#7c9c68" stroke-width="2" opacity=".55">
+    <path d="M40 230 Q75 180 95 130 M70 190 Q30 190 28 150 Q65 155 70 190 M80 170 Q120 170 130 130 Q90 133 80 170"/>
+    <path d="M1110 245 Q1080 190 1055 155 M1085 205 Q1125 205 1135 165 Q1095 170 1085 205 M1070 185 Q1030 185 1020 145 Q1060 150 1070 185"/>
+  </g>
+  <g transform="translate(600 47)">
+    <path d="M0 18 C-38 -12 -57 -7 -53 17 C-48 39 -19 41 0 18Z" fill="#83a96a">
+      <animateTransform attributeName="transform" type="rotate" values="-4 0 18;4 0 18;-4 0 18" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M0 18 C18 -18 49 -16 47 5 C44 28 19 34 0 18Z" fill="#2d6547">
+      <animateTransform attributeName="transform" type="rotate" values="4 0 18;-4 0 18;4 0 18" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M0 19 L0 42" stroke="#2d6547" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <text x="600" y="126" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="800" letter-spacing="-2" fill="url(#green)">MCC ReLoop</text>
+  <text x="600" y="169" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600" letter-spacing="3" fill="#294d39">Waste less. Loop More.</text>
+  <path d="M390 192 H480 M720 192 H810" stroke="#a3b795" stroke-width="2" stroke-linecap="round"/>
+  <text x="600" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="3" fill="#54745a">A CAMPUS REUSE PLATFORM FOR MCC STUDENTS</text>
+  <g transform="translate(535 222)" fill="none" stroke="#6b9656" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-14 0 A14 14 0 0 1 8 -12"/>
+    <path d="M2 -13 L9 -12 L9 -5"/>
+    <path d="M14 0 A14 14 0 0 1 -8 12"/>
+    <path d="M-2 13 L-9 12 L-9 5"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="18s" repeatCount="indefinite"/>
+  </g>
+  <text x="560" y="227" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2" fill="#54745a">REUSE • SHARE • REPEAT</text>
+</svg>
