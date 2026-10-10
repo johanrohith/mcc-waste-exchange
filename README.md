@@ -72,11 +72,6 @@ Developed by students of **Madras Christian College, Department of BCA**.
 
 **Academic year:** Second Year BCA
 
-## 🔗 Links
-
-- **Live Website:** [MCC ReLoop](https://johanrohith.me/mccreloop/)
-- **Source Code:** [GitHub Repository](https://github.com/johanrohith/mcc-waste-exchange)
-
 ---
 
 <p align="center">
