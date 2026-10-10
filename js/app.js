@@ -5,6 +5,7 @@
   const $$ = (selector) => document.querySelectorAll(selector);
 
   let currentUser = null;
+  let profileDisplayName = "";
   let items = [];
   let activeConversationId = null;
   let activeChannel = null;
@@ -37,19 +38,117 @@
     return typeof email === "string" && email.toLowerCase().endsWith("@mcc.edu.in");
   }
 
+  // MCC Workspace names commonly look like: "JOHAN ROHITH A G Computer Applications".
+  // First detect the boundary by format, so newly named departments do not need to be listed:
+  // an all-caps person-name prefix (including initials) followed by a Title Case department.
+  // A known-suffix fallback handles accounts whose name/suffix casing differs from that pattern.
+  function cleanDisplayName(value) {
+    if (typeof value !== "string") return "";
+    let name = value.trim().replace(/\s+/g, " ");
+    if (!name || name.includes("@")) return "";
+
+    const words = name.split(" ");
+    for (let splitAt = 2; splitAt < words.length; splitAt += 1) {
+      const namePart = words.slice(0, splitAt);
+      const departmentStart = words[splitAt];
+      const looksLikeUppercaseStudentName = namePart.every((word) =>
+        /^[A-Z]$/.test(word) || /^[A-Z][A-Z.'’\-]*$/.test(word)
+      );
+      if (looksLikeUppercaseStudentName && /^[A-Z][a-z]/.test(departmentStart)) {
+        return namePart.join(" ");
+      }
+    }
+
+    // Fallback for common department suffixes when capitalization is inconsistent.
+    // This is not the primary method; the case-pattern above supports new Title Case departments.
+    const departmentSuffixes = [
+      "Advanced Zoology and Biotechnology", "Plant Biology and Plant Biotechnology",
+      "Computer Science and Applications", "Computer Applications", "Computer Science",
+      "Visual Communication", "Corporate Secretaryship", "Political Science",
+      "Public Administration", "Business Administration", "Business Management",
+      "Information Technology", "Information Systems", "Mass Communication",
+      "Physical Education", "Physical Sciences", "Life Sciences", "Social Work",
+      "Plant Biology", "Microbiology", "Biotechnology", "Mathematics and Statistics",
+      "Zoology", "Botany", "Physics", "Chemistry", "Mathematics", "Statistics",
+      "Economics", "Commerce", "English", "Tamil", "French", "Hindi", "Sanskrit",
+      "History", "Philosophy", "Psychology", "Sociology", "Data Science", "Journalism",
+      "Computer Technology", "Commerce and Corporate Secretaryship", "B.Com", "BCA",
+      "MCA", "B.Sc", "M.Sc", "M.Com"
+    ].sort((a, b) => b.length - a.length);
+
+    const lowerName = name.toLocaleLowerCase();
+    for (const department of departmentSuffixes) {
+      const suffix = ` ${department.toLocaleLowerCase()}`;
+      if (lowerName.endsWith(suffix)) {
+        return name.slice(0, -suffix.length).trim();
+      }
+    }
+
+    return name;
+  }
+
+  function getDisplayName(user) {
+    if (!user) return "";
+    const metadata = user.user_metadata || {};
+    const structuredName = [metadata.given_name, metadata.family_name]
+      .filter((value) => typeof value === "string" && value.trim())
+      .join(" ");
+    const rawCandidates = [structuredName, profileDisplayName, metadata.full_name, metadata.name, metadata.display_name]
+      .filter((value) => typeof value === "string" && value.trim());
+    const candidates = rawCandidates.map((raw) => {
+      const normalized = raw.trim().replace(/\s+/g, " ");
+      const cleaned = cleanDisplayName(normalized);
+      return { cleaned, departmentRemoved: Boolean(cleaned) && cleaned.length < normalized.length };
+    }).filter((candidate) => candidate.cleaned);
+
+    // If any provider/profile field clearly had a department removed, prefer that cleaned value
+    // over a longer, unparsed variant from another metadata field.
+    const parsedCandidates = candidates.filter((candidate) => candidate.departmentRemoved);
+    const bestCandidates = parsedCandidates.length ? parsedCandidates : candidates;
+    bestCandidates.sort((a, b) => b.cleaned.length - a.cleaned.length);
+    return bestCandidates[0]?.cleaned || cleanDisplayName(user.email?.split("@")[0]) || "MCC member";
+  }
+
   function setAccountUI() {
-    const accountButton = $("#account-button");
+    const signInButton = $("#account-button");
+    const accountMenu = $("#account-menu");
+    const accountName = $("#account-name");
+    const mobileAccount = $("#mobile-account");
+    const mobileAccountName = $("#mobile-account-name");
     const chatsButton = $("#my-chats-button");
     if (currentUser) {
-      accountButton.textContent = currentUser.email || "Sign out";
-      accountButton.title = "Sign out of " + (currentUser.email || "MCC ReLoop");
-      accountButton.classList.add("account-email");
+      const name = getDisplayName(currentUser);
+      signInButton.hidden = true;
+      accountMenu.hidden = false;
+      accountName.textContent = name;
+      accountName.title = name;
+      mobileAccount.hidden = false;
+      mobileAccountName.textContent = name;
+      mobileAccountName.title = name;
       chatsButton.hidden = false;
     } else {
-      accountButton.textContent = "Sign in";
-      accountButton.title = "Sign in with an MCC Google account";
-      accountButton.classList.remove("account-email");
+      signInButton.hidden = false;
+      accountMenu.hidden = true;
+      accountName.textContent = "";
+      accountName.removeAttribute("title");
+      mobileAccount.hidden = true;
+      mobileAccountName.textContent = "";
+      mobileAccountName.removeAttribute("title");
       chatsButton.hidden = true;
+      profileDisplayName = "";
+    }
+  }
+
+  async function refreshProfileDisplayName(user) {
+    if (!user) return;
+    const { data, error } = await db.from("profiles")
+      .select("display_name")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (error || currentUser?.id !== user.id) return;
+    if (typeof data?.display_name === "string" && data.display_name.trim()) {
+      profileDisplayName = data.display_name.trim();
+      setAccountUI();
     }
   }
 
@@ -106,7 +205,9 @@
       return;
     }
     currentUser = nextUser;
+    profileDisplayName = "";
     setAccountUI();
+    if (currentUser) void refreshProfileDisplayName(currentUser);
     await loadItems();
     if (currentUser) await runPendingAction();
   }
@@ -292,7 +393,7 @@
       const otherId = chat.viewer_id === currentUser.id ? chat.poster_id : chat.viewer_id;
       const other = profileMap.get(otherId);
       const item = itemMap.get(chat.item_id);
-      const otherName = other?.display_name || other?.email || "MCC member";
+      const otherName = cleanDisplayName(other?.display_name) || other?.email || "MCC member";
       return `<button class="conversation-row" type="button" data-conversation-id="${escapeHtml(chat.id)}">
         <span class="conversation-avatar" aria-hidden="true">↻</span><span class="conversation-text"><strong>${escapeHtml(item?.title || "Item conversation")}</strong><small>${escapeHtml(otherName)}</small></span><span class="conversation-arrow">↗</span>
       </button>`;
@@ -323,7 +424,7 @@
       db.from("profiles").select("display_name,email").eq("id", otherId).maybeSingle()
     ]);
     $("#conversation-title").textContent = item?.title || "Item conversation";
-    $("#conversation-subtitle").textContent = other?.email || other?.display_name || "MCC member";
+    $("#conversation-subtitle").textContent = cleanDisplayName(other?.display_name) || other?.email || "MCC member";
     await loadMessages(conversationId);
     activeChannel = db.channel(`reloop-chat-${conversationId}`)
       .on("postgres_changes", {
@@ -383,8 +484,13 @@
   }
 
   async function signOut() {
-    await db.auth.signOut();
+    const { error } = await db.auth.signOut();
+    if (error) {
+      showToast("Couldn't sign out. Please try again.");
+      return;
+    }
     currentUser = null;
+    profileDisplayName = "";
     setAccountUI();
     showToast("Signed out.");
     await loadItems();
@@ -393,7 +499,9 @@
 
   // Header, dialogs and listing form.
   $("#google-signin-button").addEventListener("click", signInWithGoogle);
-  $("#account-button").addEventListener("click", () => currentUser ? signOut() : openSignIn());
+  $("#account-button").addEventListener("click", openSignIn);
+  $("#signout-button").addEventListener("click", signOut);
+  $("#mobile-signout-button").addEventListener("click", signOut);
   $("#my-chats-button").addEventListener("click", openInbox);
   ["#list-item-button", "#hero-list-button", "#section-list-button", "#empty-list-button"].forEach((selector) => $(selector).addEventListener("click", openListingDialog));
   $("#listing-form").addEventListener("submit", publishItem);
@@ -433,7 +541,9 @@
       return;
     }
     currentUser = nextUser;
+    profileDisplayName = "";
     setAccountUI();
+    if (currentUser) void refreshProfileDisplayName(currentUser);
     loadItems();
     if (currentUser) runPendingAction();
   });
