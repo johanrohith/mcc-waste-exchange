@@ -80,7 +80,7 @@
 .footer-creators{padding-top:6px;min-width:0}
 .footer-creators-kicker{margin-bottom:23px;color:#c5d5c5;letter-spacing:1.8px}
 .creator-list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 18px;margin:0;padding:0}
-.creator-list li{color:#fffefa;font-size:clamp(14px,1.25vw,17px);font-weight:700;letter-spacing:-.025em;line-height:1.35;overflow-wrap:anywhere}
+.creator-list li{color:#fffefa;font-size:clamp(20px,1.25vw,25px);font-weight:700;letter-spacing:-.025em;line-height:1.35;overflow-wrap:anywhere}
 .creator-list li:first-child{color:var(--lime)}
 .creator-course{margin:22px 0 0;color:var(--lime);font-size:13px;font-weight:800;letter-spacing:.04em}
 .creator-divider{height:1px;background:#eaf0e633;margin:24px 0 17px}
