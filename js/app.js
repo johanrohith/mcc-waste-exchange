@@ -252,7 +252,12 @@
       return;
     }
 
-    $("#item-grid").innerHTML = shown.map((item) => `
+    $("#item-grid").innerHTML = shown.map((item) => {
+      const isOwner = currentUser?.id === item.owner_id;
+      const action = isOwner
+        ? `<button class="button button-outline owner-status-button" type="button" data-item-id="${escapeHtml(item.id)}">✓ Mark as exchanged</button>`
+        : `<button class="button chat-item-button" type="button" data-item-id="${escapeHtml(item.id)}">Chat with poster ↗</button>`;
+      return `
       <article class="item-card">
         <img class="item-image" src="${escapeHtml(itemImageUrl(item.image_path))}" alt="${escapeHtml(item.title)}" loading="lazy">
         <div class="item-body">
@@ -260,20 +265,46 @@
           <h3 class="item-title">${escapeHtml(item.title)}</h3>
           <p class="item-description">${escapeHtml(item.description)}</p>
           <div class="item-tags"><span class="pill">${escapeHtml(item.purpose)}</span><span class="pill">${escapeHtml(item.item_condition)}</span></div>
-          <button class="button chat-item-button" data-item-id="${escapeHtml(item.id)}">Chat with poster ↗</button>
+          ${action}
         </div>
-      </article>`).join("");
+      </article>`;
+    }).join("");
 
     $$(".chat-item-button").forEach((button) => {
       button.addEventListener("click", () => {
-        const item = items.find((entry) => entry.id === button.dataset.itemId);
-        if (item && currentUser?.id === item.owner_id) {
-          showToast("This is your listing.");
-          return;
-        }
         if (requireMember("chat", button.dataset.itemId)) startChat(button.dataset.itemId);
       });
     });
+    $$(".owner-status-button").forEach((button) => {
+      button.addEventListener("click", () => markItemExchanged(button.dataset.itemId, button));
+    });
+  }
+
+  async function markItemExchanged(itemId, button) {
+    const item = items.find((entry) => entry.id === itemId);
+    if (!currentUser || !item || item.owner_id !== currentUser.id) {
+      showToast("Only the poster can update this listing.");
+      return;
+    }
+    if (!window.confirm(`Mark “${item.title}” as exchanged? It will be removed from the public listings.`)) return;
+
+    button.disabled = true;
+    button.textContent = "Updating…";
+    const { error } = await db.from("items")
+      .update({ status: "unavailable" })
+      .eq("id", itemId)
+      .eq("owner_id", currentUser.id);
+
+    if (error) {
+      button.disabled = false;
+      button.textContent = "✓ Mark as exchanged";
+      console.error("Listing status update failed:", error.message);
+      showToast("Could not update this listing. Please try again.");
+      return;
+    }
+
+    showToast("Marked as exchanged. The listing is no longer public.");
+    await loadItems();
   }
 
   function openListingDialog() {
