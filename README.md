@@ -2,8 +2,6 @@
   <img src="images/reloop-readme-banner.svg" width="100%" alt="MCC ReLoop">
 </p>
 
-### Waste less. Loop More.
-
 **MCC ReLoop** is a campus reuse platform built to help students of Madras Christian College give pre-loved items a second life. By connecting students who have items to share with those who need them, ReLoop encourages reuse, reduces unnecessary waste, and supports a more sustainable campus community.
 
 <p align="center">
