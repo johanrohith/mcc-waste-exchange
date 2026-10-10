@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="reloop-readme-banner.svg" width="100%" alt="MCC ReLoop">
+  <img src="images/reloop-readme-banner.svg" width="100%" alt="MCC ReLoop">
 </p>
 
 ### Waste less. Loop More.
