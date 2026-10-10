@@ -71,6 +71,13 @@
 @media(max-width:760px){.hero-mark-window{width:44%}.modal-mark-window{width:58px;height:58px}}
 
 
+.footer-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
 /* MCC ReLoop project credits footer */
 .site-footer{padding:0;background:var(--forest);color:#f4f2e9;border-top:1px solid #17231c18}
 .footer-project{width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(255px,.85fr);gap:clamp(36px,6vw,84px);align-items:start;padding:clamp(52px,7vw,96px) 5vw clamp(52px,6vw,82px)}
