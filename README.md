@@ -47,16 +47,6 @@ Visit the live website:
 
 Sign in using your eligible MCC Google account to access the platform's student features.
 
-### Run the project locally
-
-1. Download or clone this repository.
-2. Open the project folder.
-3. Configure the required Supabase project settings in the appropriate configuration file.
-4. Serve the project using a local development server.
-5. Open the website in your browser and test the application.
-
-**Security note:** Never commit Supabase service-role keys, private credentials, or other secrets to a public repository. Client-side configuration should contain only values intended to be public.
-
 ## 🌱 Why ReLoop?
 
 Traditional disposal isn't always the best option for items that are still useful. ReLoop encourages students to consider reuse before throwing things away.
