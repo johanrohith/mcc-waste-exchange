@@ -67,7 +67,7 @@ Developed by students of **Madras Christian College, Department of BCA**.
 - Ashal
 - Devadharshini
 - Jayadharshini
-- Presila
+- Prisilla
 - Sathish
 
 **Academic year:** Second Year BCA
