@@ -1,81 +1,56 @@
 <p align="center">
-  <img src="images/reloop-readme-banner.svg" width="100%" alt="MCC ReLoop">
+  <img src="images/reloop-readme-banner.svg" alt="MCC ReLoop — Waste less. Loop More." width="100%">
 </p>
 
-**MCC ReLoop** is a campus reuse platform built to help students of Madras Christian College give pre-loved items a second life. By connecting students who have items to share with those who need them, ReLoop encourages reuse, reduces unnecessary waste, and supports a more sustainable campus community.
+MCC ReLoop is a campus reuse platform that helps students of Madras Christian College pass useful, pre-loved items on to others instead of letting them go to waste.
 
 <p align="center">
-  <a href="https://johanrohith.me/mccreloop/"><strong>🌿 Visit MCC ReLoop</strong></a>
+  <a href="https://johanrohith.me/mccreloop/"><img src="https://img.shields.io/badge/LAUNCH-MCC%20ReLoop%20%E2%86%97-2E6B45?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch MCC ReLoop"></a>
 </p>
 
----
+## Features
 
-## ✨ Features
+- **MCC sign-in** — Google authentication for eligible college accounts.
+- **Item listings** — Share items you no longer need and browse items offered by others.
+- **Private messaging** — Contact an item's owner through conversations on the platform.
+- **Listing status** — Manage items as they become exchanged or unavailable.
+- **Administrative portal** — Manage listings through a separate admin page.
+- **Responsive interface** — Use the platform on mobile and desktop screens.
 
-- **MCC Student Sign-In** — Google authentication for the college community.
-- **Item Listings** — Post and discover items available for reuse.
-- **Private Messaging** — Connect with item owners through private conversations.
-- **Listing Management** — Mark items as exchanged or unavailable.
-- **Administrative Portal** — Manage listings and maintain the platform.
-- **Responsive Interface** — Access the platform from mobile devices and desktops.
-- **Sustainability-Focused Design** — An earthy visual identity built around reuse and responsible consumption.
+## Tech Stack
 
-## 🎯 Our Mission
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,js,supabase,github" height="50" alt="HTML, CSS, JavaScript, Supabase and GitHub">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Google%20OAuth-4285F4?style=flat-square&logo=google&logoColor=white" alt="Google OAuth">
+  <img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=flat-square&logo=githubpages&logoColor=white" alt="GitHub Pages">
+</p>
 
-We believe useful items shouldn't go to waste simply because someone no longer needs them.
+## Why MCC ReLoop?
 
-MCC ReLoop makes it easier for students to pass those items on to someone who can use them, helping build a campus culture where sharing and reuse become everyday habits.
+Useful items often get discarded simply because their current owner no longer needs them. ReLoop aims to make reuse easier within the MCC community by connecting students who have something to pass on with students who can use it. Its goal is to make sharing a practical first choice and reduce avoidable campus waste.
 
-## 🛠️ Built With
+## How It Works
 
-| Technology | Purpose |
-|---|---|
-| HTML5 | Website structure |
-| CSS3 | Styling and responsive layouts |
-| JavaScript | Application functionality |
-| Supabase | Database, authentication, and backend services |
-| Google OAuth | Student sign-in |
-| GitHub Pages | Website hosting |
+Students sign in with an eligible MCC Google account, post items or browse available listings, and contact owners through private conversations. Supabase provides the app's authentication and data services, while the admin page supports listing management.
 
-## 🚀 Getting Started
-
-### Use the platform
-
-Visit the live website:
-
-**https://johanrohith.me/mccreloop/**
-
-Sign in using your eligible MCC Google account to access the platform's student features.
-
-## 🌱 Why ReLoop?
-
-Traditional disposal isn't always the best option for items that are still useful. ReLoop encourages students to consider reuse before throwing things away.
-
-By making it easier to discover and exchange items within the campus community, the platform aims to:
-
-- Extend the useful life of everyday items.
-- Encourage sharing and responsible consumption.
-- Reduce avoidable waste.
-- Connect students through a common sustainability goal.
-
-## 👥 Project Team
-
-Developed by students of **Madras Christian College, Department of BCA**.
+## Project Team
 
 - Johan Rohith
 - Madhunisha
 - Ashal
 - Devadharshini
 - Jayadharshini
-- Prisilla
+- Presila
 - Sathish
 
-**Academic year:** Second Year BCA
+**Second Year BCA · Madras Christian College**
 
 ---
 
 <p align="center">
   <strong>MCC ReLoop</strong><br>
-  Waste less. Loop More. 🌿<br>
-  <sub>Built for a more sustainable campus.</sub>
+  <em>Waste less. Loop More.</em><br>
+  <sub>Made by Johan Rohith</sub>
 </p>
